@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpaca.Web.CoreAlertTool", "Alpaca.Web.CoreAlertTool.csproj", "{058382FD-A279-4DDC-B185-13BFB036C36D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{058382FD-A279-4DDC-B185-13BFB036C36D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{058382FD-A279-4DDC-B185-13BFB036C36D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{058382FD-A279-4DDC-B185-13BFB036C36D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{058382FD-A279-4DDC-B185-13BFB036C36D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {790A22EA-4197-4149-9C20-9F0183D9839C}
+	EndGlobalSection
+EndGlobal
