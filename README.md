@@ -1,2 +1,2 @@
-# AlpacaAlertUtility
+# AlpacaWorkAlertTool
 アルパカによるクソアプリのレポジトリ
