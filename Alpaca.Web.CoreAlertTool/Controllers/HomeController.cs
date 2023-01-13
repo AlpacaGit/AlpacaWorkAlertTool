@@ -53,6 +53,14 @@ namespace Alpaca.Web.CoreAlertTool.Controllers
             return View();
         }
 
+        public IActionResult List()
+        {
+
+            List<Models.AlertInfo> alerts = new List<Models.AlertInfo>();
+            alerts.Add(new Models.AlertInfo() { AlertId = "1", AlertName = "テスト", AlertTime = "0830", AlertType = 1 });
+            return View(alerts);
+        }
+
         /// <summary>
         /// エラー発生時のページ
         /// </summary>

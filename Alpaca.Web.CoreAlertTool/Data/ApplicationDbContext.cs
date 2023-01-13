@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Alpaca.Web.CoreAlertTool.Models;
 
 namespace Alpaca.Web.CoreAlertTool.Data
 {
@@ -12,5 +13,6 @@ namespace Alpaca.Web.CoreAlertTool.Data
             : base(options)
         {
         }
+        public DbSet<Alpaca.Web.CoreAlertTool.Models.AlertInfo> AlertInfo { get; set; }
     }
 }
