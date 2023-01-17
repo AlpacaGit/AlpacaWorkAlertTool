@@ -1,0 +1,36 @@
+﻿@model Alpaca.Web.CoreAlertTool.Models.AlertInfo
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>AlertInfo</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AlertTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AlertTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AlertName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AlertName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AlertType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AlertType)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.AlertId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
