@@ -6,6 +6,11 @@
 
 <h1>Index</h1>
 
+@{
+    string nowStr = DateTime.Now.ToString("HH:mm:ss");
+}
+<h1 id="nowTime" align ="center">@nowStr</h1>
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -45,3 +50,22 @@
 }
     </tbody>
 </table>
+<script>
+        const setNowTime = () => {
+        var now = new Date();
+            var Hour = now.getHours();
+            var Min = now.getMinutes();
+            var Sec = now.getSeconds();
+            if (Hour < 10) {
+                Hour = "0" + Hour;
+            }
+            if (Min < 10) {
+                Min = "0" + Min;
+            }
+            if (Sec < 10) {
+                Sec = "0" + Sec;
+            }
+            document.getElementById("nowTime").innerHTML = Hour + ":" + Min + ":" + Sec;
+        }
+        setInterval(setNowTime, 1000);
+</script>
