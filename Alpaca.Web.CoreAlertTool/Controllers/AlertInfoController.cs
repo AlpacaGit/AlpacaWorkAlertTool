@@ -10,11 +10,11 @@ using Alpaca.Web.CoreAlertTool.Models;
 
 namespace Alpaca.Web.CoreAlertTool.Controllers
 {
-    public class AlertInfoesController : Controller
+    public class AlertInfoController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public AlertInfoesController(ApplicationDbContext context)
+        public AlertInfoController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -22,7 +22,10 @@ namespace Alpaca.Web.CoreAlertTool.Controllers
         // GET: AlertInfoes
         public async Task<IActionResult> Index()
         {
-              return View(await _context.AlertInfo.ToListAsync());
+            Models.ViewModel.V_AlertList v_Alert = new Models.ViewModel.V_AlertList();
+            v_Alert.AlertInfoList = _context.AlertInfo.ToList();
+            v_Alert.AlertTypeList = _context.AlertType.ToList();
+              return View(v_Alert);
         }
 
         // GET: AlertInfoes/Details/5

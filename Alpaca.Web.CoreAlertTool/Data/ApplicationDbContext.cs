@@ -14,5 +14,6 @@ namespace Alpaca.Web.CoreAlertTool.Data
         {
         }
         public DbSet<Alpaca.Web.CoreAlertTool.Models.AlertInfo> AlertInfo { get; set; }
+        public DbSet<Alpaca.Web.CoreAlertTool.Models.AlertType> AlertType { get; set; }
     }
 }

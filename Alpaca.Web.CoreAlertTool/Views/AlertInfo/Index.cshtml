@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Alpaca.Web.CoreAlertTool.Models.AlertInfo>
+﻿@model Alpaca.Web.CoreAlertTool.Models.ViewModel.V_AlertList
 
 @{
     ViewData["Title"] = "Index";
@@ -18,19 +18,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.AlertTime)
+                @Html.DisplayNameFor(model => model.AlertInfoList.FirstOrDefault().AlertTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AlertName)
+                @Html.DisplayNameFor(model => model.AlertInfoList.FirstOrDefault().AlertName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AlertType)
+                @Html.DisplayNameFor(model => model.AlertInfoList.FirstOrDefault().AlertType)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.AlertInfoList) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.AlertTime)
@@ -39,7 +39,7 @@
                 @Html.DisplayFor(modelItem => item.AlertName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AlertType)
+                @Html.DisplayFor(modelItem => Model.AlertTypeList.Where(x => x.AlertTypeId == item.AlertType).FirstOrDefault().AlertTypeName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.AlertId">Edit</a> |
