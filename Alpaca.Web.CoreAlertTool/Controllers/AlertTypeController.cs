@@ -58,6 +58,13 @@ namespace Alpaca.Web.CoreAlertTool.Controllers
         {
             if (ModelState.IsValid)
             {
+                var lastData = _context.AlertType.OrderByDescending(x => x.AlertTypeId).FirstOrDefault();
+                int nextId = 1;
+                if (lastData != null)
+                {
+                    nextId = lastData.AlertTypeId + 1;
+                }
+                alertType.AlertTypeId = nextId;
                 _context.Add(alertType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

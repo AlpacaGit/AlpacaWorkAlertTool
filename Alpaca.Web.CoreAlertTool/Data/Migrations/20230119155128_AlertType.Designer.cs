@@ -4,6 +4,7 @@ using Alpaca.Web.CoreAlertTool.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alpaca.Web.CoreAlertTool.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230119155128_AlertType")]
+    partial class AlertType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,36 +57,6 @@ namespace Alpaca.Web.CoreAlertTool.Data.Migrations
                     b.HasKey("AlertTypeId");
 
                     b.ToTable("AlertType");
-                });
-
-            modelBuilder.Entity("Alpaca.Web.CoreAlertTool.Models.ControlLog", b =>
-                {
-                    b.Property<long>("RecId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("RecId"), 1L, 1);
-
-                    b.Property<DateTime>("ControlDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LogDetail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("LogType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PageID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SessionID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RecId");
-
-                    b.ToTable("ControlLog");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

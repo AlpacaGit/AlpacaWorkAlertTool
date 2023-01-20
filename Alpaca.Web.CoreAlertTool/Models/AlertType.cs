@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Alpaca.Web.CoreAlertTool.Models
 {
     public class AlertType
     {
         [Key]
-        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int AlertTypeId { get; set; }
 
         [Required]

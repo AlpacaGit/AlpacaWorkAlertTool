@@ -12,8 +12,7 @@ namespace Alpaca.Web.CoreAlertTool.Data.Migrations
                 name: "AlertType",
                 columns: table => new
                 {
-                    AlertTypeId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AlertTypeId = table.Column<int>(type: "int", nullable: false),
                     AlertTypeName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
