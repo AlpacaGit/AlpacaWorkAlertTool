@@ -63,6 +63,12 @@ namespace Alpaca.Web.CoreAlertTool.Controllers
         public async Task<IActionResult> Create([Bind("AlertId,AlertTime,AlertName,AlertType")] AlertInfo alertInfo)
         {
             Util.WriteLog(_context, HttpContext, ConstInfo.PageId.AlertCreate,"通知定義の登録を開始");
+            if(_context.AlertInfo.Where( x=>x.AlertId == alertInfo.AlertId).Any())
+            {
+                ModelState.AddModelError("AlertId",  String.Format(Common.Messages.DATA_ALREADY_FOUND,"アラート定義"));
+                return View(alertInfo);
+            }
+
             if (ModelState.IsValid)
             {
                 try

@@ -20,5 +20,6 @@
     public class Messages
     {
         public const string DATA_NOT_FOUND = "指定された{0}は存在しません。";
+        public const string DATA_ALREADY_FOUND = "既に{0}は存在します。";
     }
 }
