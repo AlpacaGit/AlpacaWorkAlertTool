@@ -14,5 +14,11 @@
             AlertDelete = 4,
             AlertDetail = 5,
         }
+
+    }
+
+    public class Messages
+    {
+        public const string DATA_NOT_FOUND = "指定された{0}は存在しません。";
     }
 }
