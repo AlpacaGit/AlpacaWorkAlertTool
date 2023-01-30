@@ -10,6 +10,32 @@
     string nowStr = DateTime.Now.ToString("HH:mm:ss");
 }
 <h1 id="nowTime" align ="center">@nowStr</h1>
+@*再生確認用
+    <button onclick="stop()">停止</button>
+  <button onclick="play()" id="play">再生</button>*@
+  <script language="javascript" type="text/javascript">
+  var chime = new Audio();
+  function init() {
+    chime.preload = "auto";
+    chime.src = "./chime.mp3";
+    chime.load();
+    chime.loop = false;
+    chime.addEventListener("ended", function () {
+      chime.currentTime = 0;
+    }, false);
+  }
+
+  function play() {
+    chime.play();
+  }
+
+  function stop() {
+    chime.pause();
+    chime.currentTime = 0;
+  }
+
+  init();
+  </script>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -31,8 +57,8 @@
     </thead>
     <tbody>
 @foreach (var item in Model.AlertInfoList) {
-        <tr>
-            <td>
+        <tr id="@item.AlertId">
+            <td id="@item.AlertTime" value="@item.AlertTime">
                 @Html.DisplayFor(modelItem => item.AlertTime)
             </td>
             <td>
@@ -65,7 +91,37 @@
             if (Sec < 10) {
                 Sec = "0" + Sec;
             }
+            var aTime = Hour + ":" + Min; 
             document.getElementById("nowTime").innerHTML = Hour + ":" + Min + ":" + Sec;
+            
         }
         setInterval(setNowTime, 1000);
+
+        const playAlertSound = () => {
+        var now = new Date();
+            var Hour = now.getHours();
+            var Min = now.getMinutes();
+            var Sec = now.getSeconds();
+            if (Hour < 10) {
+                Hour = "0" + Hour;
+            }
+            if (Min < 10) {
+                Min = "0" + Min;
+            }
+            if (Sec < 10) {
+                Sec = "0" + Sec;
+            }
+            var aTime = Hour + ":" + Min; 
+            document.getElementById("nowTime").innerHTML = Hour + ":" + Min + ":" + Sec;
+            
+            var elem = document.getElementById(aTime);
+            if (elem != null) {
+            console.log('見つかった！');
+                play();
+            }
+        }
+        
+        setInterval(playAlertSound, 60000);
+
+
 </script>
