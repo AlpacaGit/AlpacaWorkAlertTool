@@ -24,7 +24,7 @@ namespace Alpaca.Web.CoreAlertTool.Controllers
         public async Task<IActionResult> Index()
         {
             Models.ViewModel.V_AlertList v_Alert = new Models.ViewModel.V_AlertList();
-            v_Alert.AlertInfoList = _context.AlertInfo.ToList();
+            v_Alert.AlertInfoList = _context.AlertInfo.OrderBy(x => x.AlertTime).ToList();
             v_Alert.AlertTypeList = _context.AlertType.ToList();
             Util.WriteLog(_context, HttpContext,ConstInfo.PageId.AlertList);
             return View(v_Alert);
@@ -66,6 +66,12 @@ namespace Alpaca.Web.CoreAlertTool.Controllers
             if(_context.AlertInfo.Where( x=>x.AlertId == alertInfo.AlertId).Any())
             {
                 ModelState.AddModelError("AlertId",  String.Format(Common.Messages.DATA_ALREADY_FOUND,"アラート定義"));
+                return View(alertInfo);
+            }
+
+            if (!Common.Util.IsTimeStr(alertInfo))
+            {
+                ModelState.AddModelError("AlertTime", "時刻は HHmm、もしくはHH:mm の時刻形式である必要があります。");
                 return View(alertInfo);
             }
 
@@ -120,6 +126,12 @@ namespace Alpaca.Web.CoreAlertTool.Controllers
             {
                 Util.WriteLog(_context, HttpContext, ConstInfo.PageId.AlertEdit, "指定された通知定義は存在しませんでした。");
                 return NotFound();
+            }
+
+            if (!Common.Util.IsTimeStr(alertInfo))
+            {
+                ModelState.AddModelError("AlertTime", "時刻は HHmm、もしくはHH:mm の時刻形式である必要があります。");
+                return View(alertInfo);
             }
 
             if (ModelState.IsValid)
