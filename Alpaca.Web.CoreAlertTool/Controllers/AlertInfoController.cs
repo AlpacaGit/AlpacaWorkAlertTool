@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Alpaca.Web.CoreAlertTool.Common;
 using Alpaca.Web.CoreAlertTool.Data;
 using Alpaca.Web.CoreAlertTool.Models;
-using Alpaca.Web.CoreAlertTool.Common;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Alpaca.Web.CoreAlertTool.Controllers
 {
@@ -26,7 +21,7 @@ namespace Alpaca.Web.CoreAlertTool.Controllers
             Models.ViewModel.V_AlertList v_Alert = new Models.ViewModel.V_AlertList();
             v_Alert.AlertInfoList = _context.AlertInfo.OrderBy(x => x.AlertTime).ToList();
             v_Alert.AlertTypeList = _context.AlertType.ToList();
-            Util.WriteLog(_context, HttpContext,ConstInfo.PageId.AlertList);
+            Util.WriteLog(_context, HttpContext, ConstInfo.PageId.AlertList);
             return View(v_Alert);
         }
 
@@ -62,10 +57,10 @@ namespace Alpaca.Web.CoreAlertTool.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AlertId,AlertTime,AlertName,AlertType")] AlertInfo alertInfo)
         {
-            Util.WriteLog(_context, HttpContext, ConstInfo.PageId.AlertCreate,"通知定義の登録を開始");
-            if(_context.AlertInfo.Where( x=>x.AlertId == alertInfo.AlertId).Any())
+            Util.WriteLog(_context, HttpContext, ConstInfo.PageId.AlertCreate, "通知定義の登録を開始");
+            if (_context.AlertInfo.Where(x => x.AlertId == alertInfo.AlertId).Any())
             {
-                ModelState.AddModelError("AlertId",  String.Format(Common.Messages.DATA_ALREADY_FOUND,"アラート定義"));
+                ModelState.AddModelError("AlertId", String.Format(Common.Messages.DATA_ALREADY_FOUND, "アラート定義"));
                 return View(alertInfo);
             }
 
@@ -80,19 +75,19 @@ namespace Alpaca.Web.CoreAlertTool.Controllers
                 try
                 {
 
-                _context.Add(alertInfo);
-                await _context.SaveChangesAsync();
+                    _context.Add(alertInfo);
+                    await _context.SaveChangesAsync();
 
-                Util.WriteLog(_context, HttpContext, ConstInfo.PageId.AlertCreate,"登録完了");
-                return RedirectToAction(nameof(Index));
+                    Util.WriteLog(_context, HttpContext, ConstInfo.PageId.AlertCreate, "登録完了");
+                    return RedirectToAction(nameof(Index));
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Util.WriteLog(_context, HttpContext, ConstInfo.PageId.AlertCreate, "登録失敗");
                 }
             }
 
-            Util.WriteLog(_context, HttpContext, ConstInfo.PageId.AlertCreate,"登録失敗");
+            Util.WriteLog(_context, HttpContext, ConstInfo.PageId.AlertCreate, "登録失敗");
             return View(alertInfo);
         }
 
@@ -111,7 +106,7 @@ namespace Alpaca.Web.CoreAlertTool.Controllers
                 Util.WriteLog(_context, HttpContext, ConstInfo.PageId.AlertEdit, "指定された通知定義は存在しませんでした。");
                 return NotFound();
             }
-            Util.WriteLog(_context, HttpContext, ConstInfo.PageId.AlertEdit, "ID:"+ id.ToString() + "を表示");
+            Util.WriteLog(_context, HttpContext, ConstInfo.PageId.AlertEdit, "ID:" + id.ToString() + "を表示");
             return View(alertInfo);
         }
 
@@ -196,7 +191,7 @@ namespace Alpaca.Web.CoreAlertTool.Controllers
             {
                 _context.AlertInfo.Remove(alertInfo);
             }
-            
+
             await _context.SaveChangesAsync();
             Util.WriteLog(_context, HttpContext, ConstInfo.PageId.AlertDelete, "ID:" + id.ToString() + "の削除を完了");
             return RedirectToAction(nameof(Index));
@@ -204,7 +199,7 @@ namespace Alpaca.Web.CoreAlertTool.Controllers
 
         private bool AlertInfoExists(string id)
         {
-          return _context.AlertInfo.Any(e => e.AlertId == id);
+            return _context.AlertInfo.Any(e => e.AlertId == id);
         }
 
 
